@@ -39,6 +39,16 @@ self.MonacoEnvironment = {
 const PLACEHOLDER = `body {
   color: magenta;
 }`;
+const MONACO_INIT_OPTIONS = {
+  value: PLACEHOLDER,
+  contextmenu: false,
+  language: 'css',
+  lineDecorationsWidth: 1,
+  lineNumbersMinChars: 3,
+  minimap: {
+    maxColumn: 40,
+  },
+};
 
 const REMOVE_HOSTNAME_BUTTON_INIT_VALUE = '削除';
 const SAVE_BUTTON_INIT_VALUE = '保存';
@@ -76,16 +86,10 @@ const App: React.FC = () => {
     if (!editorDivRef.current) {
       return;
     }
-    const newEditor = monaco.editor.create(editorDivRef.current, {
-      value: PLACEHOLDER,
-      contextmenu: false,
-      language: 'css',
-      lineDecorationsWidth: 1,
-      lineNumbersMinChars: 3,
-      minimap: {
-        maxColumn: 40,
-      },
-    });
+    const newEditor = monaco.editor.create(
+      editorDivRef.current,
+      MONACO_INIT_OPTIONS
+    );
     setEditor(newEditor);
   }, []);
 
