@@ -4,6 +4,8 @@ import {
   LAST_SELECTED_HOST_NAME,
 } from './constants';
 
+const MONACO_CUSTOM_OPTIONS = 'monacoCustomOptions';
+
 type Data = {
   hostnameSet: HostnameSet;
   lastSelectedHostname: string;
@@ -32,6 +34,13 @@ export const getLocalStorageItem = (key: string, defaultValue = ''): string => {
 export const getHostnameSet = (): HostnameSet => {
   try {
     return JSON.parse(getLocalStorageItem(HOSTNAME_SET, '{}'));
+  } catch {
+    return {};
+  }
+};
+export const getMonacoCustomOptions = (): Record<string, unknown> => {
+  try {
+    return JSON.parse(getLocalStorageItem(MONACO_CUSTOM_OPTIONS, '{}'));
   } catch {
     return {};
   }

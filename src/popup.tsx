@@ -15,6 +15,7 @@ import {
   getHostnameSet,
   importDataToLocalStorage,
   downloadDataAsJson,
+  getMonacoCustomOptions,
 } from './lib/utils';
 
 // @ts-expect-error: MonacoEnvironment is undefined in window
@@ -49,6 +50,7 @@ const MONACO_INIT_OPTIONS = {
     maxColumn: 40,
   },
 };
+const monacoCustomOptions = getMonacoCustomOptions();
 
 const REMOVE_HOSTNAME_BUTTON_INIT_VALUE = '削除';
 const SAVE_BUTTON_INIT_VALUE = '保存';
@@ -86,10 +88,10 @@ const App: React.FC = () => {
     if (!editorDivRef.current) {
       return;
     }
-    const newEditor = monaco.editor.create(
-      editorDivRef.current,
-      MONACO_INIT_OPTIONS
-    );
+    const newEditor = monaco.editor.create(editorDivRef.current, {
+      ...MONACO_INIT_OPTIONS,
+      ...monacoCustomOptions,
+    });
     setEditor(newEditor);
   }, []);
 
